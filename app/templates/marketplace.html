@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Umeed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        :root {
+            --primary-blue: #87CEEB;
+            --dark-blue: #4A90E2;
+            --accent-teal: #B2E5E5;
+            --text-dark: #2C3E50;
+            --text-light: #718096;
+            --white: #FFFFFF;
+            --light-gray: #F7FAFC;
+            --background: #f0f8ff;
+            --green: #2ecc71;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            margin-top: 100px; /* Space for fixed navbar */
+        }
+        /* Header */
+        .marketplace-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            border-radius: 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .marketplace-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .marketplace-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--primary-blue);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Grid for cards */
+        .marketplace-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .item-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(135, 206, 235, 0.1);
+            border: 1px solid rgba(135, 206, 235, 0.2);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .item-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(135, 206, 235, 0.2);
+        }
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: var(--light-gray);
+        }
+        .item-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .item-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        .item-specialty {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        .item-card p {
+            color: var(--text-light);
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .item-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+        .buy-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--green), #27ae60);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+        }
+        
+        /* Navbar */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        nav .logo img { height: 60px; width: auto; }
+        nav ul { display: flex; gap: 25px; list-style: none; align-items: center; }
+        nav ul li a { text-decoration: none; color: #333; font-size: 1rem; transition: color 0.2s ease; }
+        nav ul li a:hover { color: #7bb5ac; }
+        nav .btn { padding: 8px 16px; background: #7bb5ac; color: #fff !important; border-radius: 8px; font-weight: 500; transition: background 0.3s ease; }
+        nav .btn:hover { background: #2c3e50; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 25px; height: 3px; background: #333; transition: all 0.3s ease-in-out; }
+        .menu-links { position: absolute; right: 5%; top: 70px; background-color: white; width: fit-content; max-height: 0; overflow: hidden; border-radius: 10px; transition: all 0.3s ease-in-out; }
+        .menu-links.open { max-height: 300px; }
+        .menu-links a { display: block; padding: 10px 20px; text-align: left; font-size: 1rem; color: black; text-decoration: none; }
+        .menu-links li { list-style: none; }
+        .hamburger.open span:first-child { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:last-child { transform: rotate(-45deg) translate(5px, -5px); }
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hamburger { display: flex; }
+            .container { margin-top: 80px; }
+            .marketplace-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="/static/components/logo.png" alt="Umeed Logo" />
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/resources">Resources</a></li>
+            <li><a href="/peerforum">Peer Forum</a></li>
+            <li><a href="/marketplace">Marketplace</a></li>
+            <li><a href="/chat" class="btn">Get Started</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/resources">Resources</a></li>
+            <li><a href="/peerforum">Peer forums</a></li>
+            <li><a href="/marketplace">Marketplace</a></li>
+            <li><a href="/chat" class="btn">Get Started</a></li>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="marketplace-header">
+            <h1>Student Wellness Marketplace</h1>
+            <p>A curated selection of services and products to support your mental and academic well-being.</p>
+        </header>
+
+        <h2 class="section-title">Verified Therapists</h2>
+        <main class="marketplace-grid">
+            {% for therapist in therapists %}
+            <div class="item-card">
+                <img src="{{ therapist.image_url }}" alt="{{ therapist.name }}" class="item-image">
+                <div class="item-content">
+                    <h3>{{ therapist.name }}</h3>
+                    <div class="item-specialty">{{ therapist.specialty }}</div>
+                    <p>{{ therapist.description }}</p>
+                    <div class="item-footer">
+                        <span class="item-price">₹{{ "%.0f"|format(therapist.price) }}/session</span>
+                        <button class="buy-btn" onclick="alert('Payment integration coming soon! This is a demo.')">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </main>
+
+        <h2 class="section-title">Wellness Products</h2>
+        <main class="marketplace-grid">
+            {% for product in products %}
+            <div class="item-card">
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="item-image">
+                <div class="item-content">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                    <div class="item-footer">
+                        <span class="item-price">₹{{ "%.0f"|format(product.price) }}</span>
+                        <button class="buy-btn" onclick="alert('Payment integration coming soon! This is a demo.')">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </main>
+
+    </div>
+
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const menu = document.querySelector(".menu-links");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("open");
+            menu.classList.toggle("open");
+        });
+    </script>
+</body>
+</html>

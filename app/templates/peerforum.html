@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer Forum - Umeed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        :root {
+            --primary-color: #7bb5ac;
+            --dark-blue: #4A90E2;
+            --primary-blue: #87CEEB;
+            --text-dark: #2C3E50;
+            --text-light: #718096;
+            --white: #FFFFFF;
+            --background-gradient: linear-gradient(135deg, #f8fbff 0%, #e8f4fd 100%);
+            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        html, body {
+            height: 100%; /* Ensure html and body take full height */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background-gradient);
+            min-height: 100vh;
+            color: var(--text-dark);
+            margin: 0;
+            padding-top: 90px; /* Space for fixed navbar */
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+        
+        /* --- Navbar --- */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0; 
+        }
+        nav .logo img { height: 60px; width: auto; }
+        nav ul { display: flex; gap: 25px; list-style: none; align-items: center; }
+        nav ul li a { text-decoration: none; color: #333; font-size: 1rem; transition: color 0.2s ease; }
+        nav ul li a:hover { color: #7bb5ac; }
+        nav .btn { padding: 8px 16px; background: #7bb5ac; color: #fff !important; border-radius: 8px; font-weight: 500; transition: background 0.3s ease; }
+        nav .btn:hover { background: #2c3e50; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 25px; height: 3px; background: #333; transition: all 0.3s ease-in-out; }
+        .menu-links { position: absolute; right: 5%; top: 70px; background-color: white; width: fit-content; max-height: 0; overflow: hidden; border-radius: 10px; transition: all 0.3s ease-in-out; list-style: none; }
+        .menu-links.open { max-height: 300px; }
+        .menu-links a { display: block; padding: 10px 20px; text-align: left; font-size: 1rem; color: black; text-decoration: none; }
+        .menu-links li { list-style: none; }
+        .hamburger.open span:first-child { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:last-child { transform: rotate(-45deg) translate(5px, -5px); }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hamburger { display: flex; }
+        }
+
+        /* --- NEW: Portal Container Styling --- */
+        .portal-container {
+            flex-grow: 1; /* Make it take all remaining vertical space */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .portal-card {
+            background: var(--white);
+            border-radius: 25px;
+            box-shadow: var(--card-shadow);
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid rgba(135, 206, 235, 0.2);
+            transform: translateY(-20px);
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .portal-card h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .portal-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .portal-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .portal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.3);
+        }
+        .portal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--dark-blue);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="/static/components/logo.png" alt="Umeed Logo" />
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/resources">Resources</a></li>
+            <li><a href="/marketplace">Marketplace</a></li>
+            <li><a href="/chat" class="btn">Get Started</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="menu-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/resources">Resources</a></li>
+            <li><a href="/marketplace">Marketplace</a></li>
+            <li><a href="/chat" class="btn">Get Started</a></li>
+        </ul>
+    </nav>
+
+    <div class="portal-container">
+        <div class="portal-card">
+            <div class="portal-icon"><i class='bx bxs-paint'></i></div>
+            <h1>Virtual Lounge</h1>
+            <p>You are about to enter a shared, anonymous space. You can draw, write, and interact with other students. Be kind and respectful.</p>
+            <a 
+                href="https://www.tldraw.com/r/umeed_peer_forum_shared" 
+                class="portal-btn"
+                target="_blank" 
+                rel="noopener noreferrer"
+            >
+                Open Lounge in New Tab
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // --- Hamburger Menu Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector(".hamburger");
+            const menu = document.querySelector(".menu-links");
+            const menuLinks = document.querySelectorAll(".menu-links a");
+
+            const toggleMenu = () => {
+                hamburger.classList.toggle("open");
+                menu.classList.toggle("open");
+            };
+
+            hamburger.addEventListener("click", toggleMenu);
+            menuLinks.forEach(link => {
+                link.addEventListener("click", toggleMenu);
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 768) {
+                    hamburger.classList.remove("open");
+                    menu.classList.remove("open");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

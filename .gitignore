@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+*.env
+
+# Flask instance folder
+instance/
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Byte-compiled / compiled files
+*.so
+
+# MacOS system files
+.DS_Store
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Cache and temporary files
+.cache/
+.tmp/
+temp/
+tmp/
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build and dist
+build/
+dist/
+htmlcov/
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
