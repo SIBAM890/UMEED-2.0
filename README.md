@@ -52,9 +52,6 @@ A relaxing digital environment promoting mindfulness and taking mental breaks.
 
 Admins can manage posts, monitor activity, ensure safety, and handle community guidelines.
 
-# 🚀 Quick Start
-
-### 🔴 Live Demo
 
 **(Add link here)**
 `https://your-demo-url.com` *(optional)*
